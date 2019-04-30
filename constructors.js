@@ -16,6 +16,13 @@
 
 // Code here
 
+function CarFactory(make, model){
+  return{
+    make,
+    model
+  }
+}
+
 ////////// PROBLEM 2 //////////
 
 // Do not edit the code below.
@@ -34,6 +41,8 @@ function Employee(name, email, hireDate) {
 */
 
 // Code here
+
+const bob = new Employee('Bob', 'bob@gmail.com', '01-02-98')
 
 ////////// PROBLEM 3 //////////
 
@@ -58,6 +67,18 @@ mustang.moveCar(); // Increments mustang' move property by 10. Returns the new m
 
 // Code here
 
+function Car(make, model, year){
+  return{
+    make,
+    model,
+    year,
+    miles: 0,
+    moveCar: function(){
+      return this.miles +=10
+    }
+  }
+}
+
 ////////// PROBLEM 4 //////////
 
 /*
@@ -77,6 +98,10 @@ function Movie(name, genre, rating) {
 
 // Code here
 
+Movie.prototype.changeRating = function(newRating){
+  return this.rating = (this.rating + newRating) / 2
+}
+
 ////////// PROBLEM 5 //////////
 
 // Write a constructor function called User. This function should take in 4 parameters called name, age, email, and savedPosts in that order. Name and email will be strings, age will be a number and savedPosts will be an array of objects. These objects will each have 3 properties: id (a number), title (a string), and rating (a number between 1 and 5). These objects are the posts that the user will have saved to their account.
@@ -84,6 +109,34 @@ function Movie(name, genre, rating) {
 // Once the User constructor function is created, write a prototype method for the User function. Name this method addSavedPost. It should take in three parameters: id (a number), title (a string) and rating (a number). Use these parameters to create a new object and add it to the savedPosts array. Make sure to name the properties the same as described previously (id, title, rating).
 
 // Code here
+
+class User{
+  constructor(name, age, email, savedPosts){
+    this.name = name
+    this.age = age
+    this.email = email
+    this.savedPosts = savedPosts
+  }
+
+  addSavedPost(id, title, rating){
+    this.savedPosts = [...this.savedPosts, {
+      id,
+      title,
+      rating
+    }]
+  }
+
+  removeSavedPost(id) {
+    let index = this.savedPosts.findIndex(item => item.id === id)
+    this.savedPosts.splice(index, 1)
+  }
+
+  changePostRating(id, newRating) {
+    let index = this.savedPosts.findIndex(item => item.id === id)    
+    this.savedPosts[index].rating = newRating
+  }
+}
+
 
 ////////// PROBLEM 6 //////////
 
